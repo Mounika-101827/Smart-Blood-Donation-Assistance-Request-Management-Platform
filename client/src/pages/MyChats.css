@@ -1,0 +1,122 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+.mychats-container{
+    min-height:100vh;
+    background:#f8f9fc;
+    padding:40px 8%;
+}
+
+.mychats-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.mychats-header h1{
+    color:#c62828;
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.mychats-header p{
+    color:#666;
+    font-size:18px;
+}
+
+.chat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
+    gap:25px;
+}
+
+.chat-card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.chat-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(198,40,40,.18);
+}
+
+.avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#e53935,#c62828);
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.chat-info{
+    flex:1;
+}
+
+.chat-info h3{
+    color:#222;
+    margin-bottom:6px;
+    font-size:22px;
+}
+
+.chat-info p{
+    color:#777;
+    font-size:15px;
+}
+
+.chat-btn{
+    background:linear-gradient(135deg,#e53935,#c62828);
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.chat-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(198,40,40,.3);
+}
+
+.empty-chat{
+    width:600px;
+    max-width:100%;
+    margin:80px auto;
+    background:white;
+    border-radius:20px;
+    padding:60px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.empty-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.empty-chat h2{
+    color:#c62828;
+    margin-bottom:12px;
+}
+
+.empty-chat p{
+    color:#666;
+    line-height:1.6;
+}
