@@ -1,7 +1,9 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv");
 
 const donorRoutes = require("./routes/donorRoutes");
 const requestRoutes = require("./routes/requestRoutes");
@@ -10,8 +12,6 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const authRoutes = require("./routes/authRoutes");
-
-dotenv.config();
 
 const app = express();
 
@@ -28,20 +28,44 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/messages", messageRoutes);
 
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("✅ MongoDB Connected");
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Failed:", err);
-  });
-
-// Test Route
+// Test route
 app.get("/", (req, res) => {
-  res.send("Blood Donation Assistance System Backend Running...");
+    res.status(200).send(
+        "Blood Donation Assistance System Backend Running..."
+    );
 });
 
-// Export Express app for Vercel
+// MongoDB connection
+let isConnected = false;
+
+async function connectDB() {
+    if (isConnected) {
+        return;
+    }
+
+    if (!process.env.MONGO_URI) {
+        throw new Error("MONGO_URI environment variable is missing");
+    }
+
+    await mongoose.connect(process.env.MONGO_URI);
+
+    isConnected = true;
+    console.log("✅ MongoDB Connected");
+}
+
+// Connect MongoDB before handling API requests
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error("❌ MongoDB Connection Failed:", error);
+        res.status(500).json({
+            message: "Database connection failed",
+            error: error.message
+        });
+    }
+});
+
+// Export app for Vercel
 module.exports = app;
