@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateRequestStatus } from "../services/requestService";
-import "./PreDonationScreening.css";
+import "./preDonationScreening.css";
 
 function PreDonationScreening() {
   const [form, setForm] =useState({
